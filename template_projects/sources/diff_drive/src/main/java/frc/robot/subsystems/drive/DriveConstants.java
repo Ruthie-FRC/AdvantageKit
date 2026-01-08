@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems.drive;
 
-import com.pathplanner.lib.config.ModuleConfig;
-import com.pathplanner.lib.config.RobotConfig;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
 
@@ -41,21 +39,4 @@ public class DriveConstants {
   public static final double simKd = 0.0;
   public static final double simKs = 0.0;
   public static final double simKv = 0.227;
-
-  // PathPlanner configuration
-  public static final double robotMassKg = 74.088;
-  public static final double robotMOI = 6.883;
-  public static final double wheelCOF = 1.2;
-  public static final RobotConfig ppConfig =
-      new RobotConfig(
-          robotMassKg,
-          robotMOI,
-          new ModuleConfig(
-              wheelRadiusMeters,
-              maxSpeedMetersPerSec,
-              wheelCOF,
-              gearbox.withReduction(motorReduction),
-              currentLimit,
-              2),
-          trackWidth);
 }
