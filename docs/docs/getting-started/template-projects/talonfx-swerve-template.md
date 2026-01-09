@@ -322,22 +322,6 @@ The project already includes basic mechanisms to reduce skidding, such as drive 
 
 ### Advanced Physics Simulation
 
-    setpointGenerator = new SwerveSetpointGenerator(...);
-    previousSetpoint = new SwerveSetpoint(getChassisSpeeds(), getModuleStates(), DriveFeedforwards.zeroes(4));
-
-    // ...
-}
-
-public void runVelocity(ChassisSpeeds speeds) {
-    previousSetpoint = setpointGenerator.generateSetpoint(previousSetpoint, speeds, 0.02);
-    SwerveModuleStatep[] setpointStates = previousSetpoint.moduleStates();
-
-    // ...
-}
-```
-
-### Advanced Physics Simulation
-
 The project can be easily adapted to utilize Team 5516's [maple-sim](https://github.com/Shenzhen-Robotics-Alliance/Maple-Sim) library for simulation, which provides a full rigid-body simulation of the swerve drive and its interactions with the field. Check the documentation for more details on how to install and use the library.
 
 ### Real-Time Thread Priority
