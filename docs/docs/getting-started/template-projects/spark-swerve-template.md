@@ -184,14 +184,6 @@ The value of `driveMotorCurrentLimit` can be tuned to avoid slipping the wheels.
 
 4. Update the value of `driveMotorCurrentLimit` to this value.
 
-### PathPlanner Configuration
-
-The project includes a built-in configuration for [PathPlanner](https://pathplanner.dev), located in the constructor of `Drive.java`. You may wish to manually adjust the following values:
-
-- Robot mass, MOI, and wheel coefficient as configured at the bottom of `DriveConstants.java`
-- Drive PID constants as configured in `AutoBuilder`.
-- Turn PID constants as configured in `AutoBuilder`.
-
 ## Customization
 
 ### Setting Odometry Frequency
@@ -264,28 +256,7 @@ This project is compatible with AdvantageKit's [vision template project](./visio
 
 ### Swerve Setpoint Generator
 
-The project already includes basic mechanisms to reduce skidding, such as drive current limits and cosine optimization. Users who prefer more control over module skidding may wish to utilize Team 254's swerve setpoint generator. Documentation for using the version of this algorithm bundled with PathPlanner can be found [here](https://pathplanner.dev/pplib-swerve-setpoint-generator.html). The `SwerveSetpointGenerator` should be instantiated in the `Drive` subsystem and used in the `runVelocity` method, as shown below:
-
-```java
-private final SwerveSetpointGenerator setpointGenerator;
-private SwerveSetpoint previousSetpoint;
-
-public Drive(...) {
-    // ...
-
-    setpointGenerator = new SwerveSetpointGenerator(...);
-    previousSetpoint = new SwerveSetpoint(getChassisSpeeds(), getModuleStates(), DriveFeedforwards.zeroes(4));
-
-    // ...
-}
-
-public void runVelocity(ChassisSpeeds speeds) {
-    previousSetpoint = setpointGenerator.generateSetpoint(previousSetpoint, speeds, 0.02);
-    SwerveModuleStatep[] setpointStates = previousSetpoint.moduleStates();
-
-    // ...
-}
-```
+The project already includes basic mechanisms to reduce skidding, such as drive current limits and cosine optimization. Users who prefer more control over module skidding may wish to utilize Team 254's swerve setpoint generator. This algorithm can be implemented independently or by integrating an autonomous path-planning library.
 
 ### Advanced Physics Simulation
 

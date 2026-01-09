@@ -131,10 +131,6 @@ The effective maximum speed of a robot is typically slightly less than the thero
 
 5. Record the maximum velocity achieved and update the value of `maxSpeedMetersPerSec`.
 
-### PathPlanner Configuration
-
-The project includes a built-in configuration for [PathPlanner](https://pathplanner.dev), located in the constructor of `Drive.java`. You may wish to manually adjust the robot mass, MOI, and wheel coefficient as configured at the bottom of `DriveConstants.java`
-
 ## Customization
 
 ### Custom Gyro Implementations

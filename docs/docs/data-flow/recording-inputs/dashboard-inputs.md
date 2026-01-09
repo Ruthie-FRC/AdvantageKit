@@ -40,16 +40,3 @@ public Command getAutonomousCommand() {
 :::tip
 AdvantageScope supports tuning via NetworkTables when running in the AdvantageKit NetworkTables mode. Tunable values must be published to the "/Tuning" table using `LoggedNetworkNumber`, `LoggedNetworkString`, or `LoggedNetworkBoolean`. Check the [AdvantageScope docs](https://docs.advantagescope.org/overview/live-sources/tuning-mode#tuning-with-advantagekit) for details.
 :::
-
-A `LoggedDashboardChooser` can also be constructed using an existing `SendableChooser`, which allows for compatibility with PathPlanner's `AutoBuilder` API:
-
-```java
-private final LoggedDashboardChooser<Command> autoChooser;
-
-public RobotContainer() {
-    // ...
-
-    // buildAutoChooser() returns a SendableChooser
-    autoChooser = new LoggedDashboardChooser<>("Auto Routine", AutoBuilder.buildAutoChooser());
-}
-```

@@ -56,11 +56,9 @@ CTRE only permits the swerve project generator to be used on swerve robots with 
 
 6. On the final screen in Tuner X, choose "Generate only TunerConstants" and overwrite the file located at `src/main/java/frc/robot/generated/TunerConstants.java`.
 
-7. In `TunerConstants.java`, comment out the [last import](https://github.com/CrossTheRoadElec/Phoenix6-Examples/blob/88be410fdbfd811e6f776197d41c0bea5f109b0e/java/SwerveWithPathPlanner/src/main/java/frc/robot/generated/TunerConstants.java#L17) and [last method](https://github.com/CrossTheRoadElec/Phoenix6-Examples/blob/88be410fdbfd811e6f776197d41c0bea5f109b0e/java/SwerveWithPathPlanner/src/main/java/frc/robot/generated/TunerConstants.java#L198-L202). Before removing them, both lines will be marked as errors in VSCode.
+7. In `TunerConstants.java`, change `kSteerInertia` to 0.004 and `kDriveInertia` to 0.025.
 
-8. In `TunerConstants.java`, change `kSteerInertia` to 0.004 and `kDriveInertia` to 0.025.
-
-9. If the robot does not use the default arrangement of 8 TalonFXs and 4 CANcoders, please see the section [here](#custom-module-implementations) on alternative module IO implementations.
+8. If the robot does not use the default arrangement of 8 TalonFXs and 4 CANcoders, please see the section [here](#custom-module-implementations) on alternative module IO implementations.
 
 :::warning
 The project is configured to save log files when running on a real robot. **A FAT32 formatted USB stick must be connected to one of the roboRIO USB ports to save log files.**
@@ -244,14 +242,6 @@ The value of `kSlipCurrent` can be tuned to avoid slipping the wheels.
 
 4. Update the value of `kSlipCurrent` to this value.
 
-### PathPlanner Configuration
-
-The project includes a built-in configuration for [PathPlanner](https://pathplanner.dev), located in the constructor of `Drive.java`. You may wish to manually adjust the following values:
-
-- Robot mass, MOI, and wheel coefficient as configured at the top of `Drive.java`
-- Drive PID constants as configured in `AutoBuilder`.
-- Turn PID constants as configured in `AutoBuilder`.
-
 ## Customization
 
 ### Setting Odometry Frequency
@@ -328,14 +318,9 @@ This project is compatible with AdvantageKit's [vision template project](./visio
 
 ### Swerve Setpoint Generator
 
-The project already includes basic mechanisms to reduce skidding, such as drive current limits and cosine optimization. Users who prefer more control over module skidding may wish to utilize Team 254's swerve setpoint generator. Documentation for using the version of this algorithm bundled with PathPlanner can be found [here](https://pathplanner.dev/pplib-swerve-setpoint-generator.html). The `SwerveSetpointGenerator` should be instantiated in the `Drive` subsystem and used in the `runVelocity` method, as shown below:
+The project already includes basic mechanisms to reduce skidding, such as drive current limits and cosine optimization. Users who prefer more control over module skidding may wish to utilize Team 254's swerve setpoint generator. This algorithm can be implemented independently or by integrating an autonomous path-planning library.
 
-```java
-private final SwerveSetpointGenerator setpointGenerator;
-private SwerveSetpoint previousSetpoint;
-
-public Drive(...) {
-    // ...
+### Advanced Physics Simulation
 
     setpointGenerator = new SwerveSetpointGenerator(...);
     previousSetpoint = new SwerveSetpoint(getChassisSpeeds(), getModuleStates(), DriveFeedforwards.zeroes(4));
