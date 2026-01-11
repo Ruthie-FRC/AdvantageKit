@@ -71,17 +71,18 @@ class LoggedSystemStats {
     ConnectionInfo[] ntConnections = NetworkTableInstance.getDefault().getConnections();
     Set<String> ntRemoteIds = new HashSet<>();
 
-    for (int i = 0; i < ntConnections.length; i++) {
-      lastNTRemoteIds.remove(ntConnections[i].remote_id);
-      ntRemoteIds.add(ntConnections[i].remote_id);
-      final var ntClientTable = ntClientsTable.getSubtable(ntConnections[i].remote_id);
+    if (ntConnections != null) {
+      for (ConnectionInfo connection : ntConnections) {
+        lastNTRemoteIds.remove(connection.remote_id);
+        ntRemoteIds.add(connection.remote_id);
+        final var ntClientTable = ntClientsTable.getSubtable(connection.remote_id);
 
-      ntClientTable.put("Connected", true);
-      ntClientTable.put("IPAddress", ntConnections[i].remote_ip);
-      ntClientTable.put("RemotePort", ntConnections[i].remote_port);
-      ntIntBuffer.rewind();
-      ntClientTable.put(
-          "ProtocolVersion", ntIntBuffer.putInt(ntConnections[i].protocol_version).array());
+        ntClientTable.put("Connected", true);
+        ntClientTable.put("IPAddress", connection.remote_ip);
+        ntClientTable.put("RemotePort", connection.remote_port);
+        ntIntBuffer.rewind();
+        ntClientTable.put("ProtocolVersion", ntIntBuffer.putInt(connection.protocol_version).array());
+      }
     }
 
     for (var remoteId : lastNTRemoteIds) {

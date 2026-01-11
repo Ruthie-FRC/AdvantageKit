@@ -33,7 +33,7 @@ import org.littletonrobotics.junction.mechanism.LoggedMechanism2d;
  */
 public class AutoLogOutputManager {
   private static final List<Runnable> callbacks = new ArrayList<>();
-  private static final List<Integer> scannedObjectHashes = new ArrayList<>();
+  private static final Set<Integer> scannedObjectHashes = new HashSet<>();
   private static final Set<String> allowedPackages = new HashSet<>();
 
   private AutoLogOutputManager() {}

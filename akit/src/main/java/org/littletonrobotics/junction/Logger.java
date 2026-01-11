@@ -265,8 +265,8 @@ public class Logger {
 
       // Update dashboard inputs
       long dashboardInputsStart = RobotController.getFPGATime();
-      for (int i = 0; i < dashboardInputs.size(); i++) {
-        dashboardInputs.get(i).periodic();
+      for (LoggedNetworkInput input : dashboardInputs) {
+        input.periodic();
       }
       long dashboardInputsEnd = RobotController.getFPGATime();
 

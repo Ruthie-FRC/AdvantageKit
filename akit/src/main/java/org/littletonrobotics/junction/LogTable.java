@@ -1642,64 +1642,67 @@ public class LogTable {
 
   /** Returns a string representation of the table. */
   public String toString() {
-    String output = "Timestamp=" + Long.toString(timestamp.value) + "\n";
-    output += "Prefix=\"" + prefix + "\"\n";
-    output += "{\n";
+    StringBuilder output = new StringBuilder();
+    output.append("Timestamp=").append(timestamp.value).append("\n");
+    output.append("Prefix=\"").append(prefix).append("\"\n");
+    output.append("{\n");
     for (Map.Entry<String, LogValue> field : getAll(true).entrySet()) {
-      output += "\t" + field.getKey() + "[" + field.getValue().type.toString();
+      output.append("\t").append(field.getKey()).append("[").append(field.getValue().type);
       if (field.getValue().customTypeStr != null) {
-        output += "," + field.getValue().customTypeStr.toString();
+        output.append(",").append(field.getValue().customTypeStr);
       }
       if (field.getValue().unitStr != null) {
-        output += "," + field.getValue().unitStr.toString();
+        output.append(",").append(field.getValue().unitStr);
       }
-      output += "]=";
+      output.append("]=");
       LogValue value = field.getValue();
       switch (value.type) {
         case Raw:
-          output += Arrays.toString(value.getRaw());
+          output.append(Arrays.toString(value.getRaw()));
           break;
         case Boolean:
-          output += value.getBoolean() ? "true" : "false";
+          output.append(value.getBoolean() ? "true" : "false");
           break;
         case Integer:
-          output += Long.toString(value.getInteger());
+          output.append(value.getInteger());
           break;
         case Float:
-          output += Float.toString(value.getFloat());
+          output.append(value.getFloat());
           break;
         case Double:
-          output += Double.toString(value.getDouble());
+          output.append(value.getDouble());
           break;
         case String:
-          output += "\"" + value.getString() + "\"";
+          output.append("\"").append(value.getString()).append("\"");
           break;
         case BooleanArray:
-          output += Arrays.toString(value.getBooleanArray());
+          output.append(Arrays.toString(value.getBooleanArray()));
           break;
         case IntegerArray:
-          output += Arrays.toString(value.getIntegerArray());
+          output.append(Arrays.toString(value.getIntegerArray()));
           break;
         case FloatArray:
-          output += Arrays.toString(value.getFloatArray());
+          output.append(Arrays.toString(value.getFloatArray()));
           break;
         case DoubleArray:
-          output += Arrays.toString(value.getDoubleArray());
+          output.append(Arrays.toString(value.getDoubleArray()));
           break;
         case StringArray:
-          output += "[";
+          output.append("[");
           String[] stringArray = value.getStringArray();
           for (int i = 0; i < stringArray.length; i++) {
-            output += "\"" + stringArray[i] + "\"";
-            output += i < stringArray.length - 1 ? "," : "";
+            output.append("\"").append(stringArray[i]).append("\"");
+            if (i < stringArray.length - 1) {
+              output.append(",");
+            }
           }
-          output += "]";
+          output.append("]");
           break;
       }
-      output += "\n";
+      output.append("\n");
     }
-    output += "}";
-    return output;
+    output.append("}");
+    return output.toString();
   }
 
   /** Represents a value stored in a LogTable, including type and value. */

@@ -27,8 +27,8 @@ class ReceiverThread extends Thread {
 
   public void run() {
     // Start data receivers
-    for (int i = 0; i < dataReceivers.size(); i++) {
-      dataReceivers.get(i).start();
+    for (LogDataReceiver receiver : dataReceivers) {
+      receiver.start();
     }
 
     try {
@@ -36,25 +36,26 @@ class ReceiverThread extends Thread {
         LogTable entry = queue.take(); // Wait for data
 
         // Send data to receivers
-        for (int i = 0; i < dataReceivers.size(); i++) {
-          dataReceivers.get(i).putTable(entry);
+        for (LogDataReceiver receiver : dataReceivers) {
+          receiver.putTable(entry);
         }
       }
     } catch (InterruptedException exception) {
       // Empty queue
       while (!queue.isEmpty()) {
         LogTable entry = queue.poll();
-        for (int i = 0; i < dataReceivers.size(); i++) {
+        for (LogDataReceiver receiver : dataReceivers) {
           try {
-            dataReceivers.get(i).putTable(entry);
+            receiver.putTable(entry);
           } catch (InterruptedException e) {
+            // Interrupted while emptying queue, continue to next receiver
           }
         }
       }
 
       // End all data receivers
-      for (int i = 0; i < dataReceivers.size(); i++) {
-        dataReceivers.get(i).end();
+      for (LogDataReceiver receiver : dataReceivers) {
+        receiver.end();
       }
     }
   }
