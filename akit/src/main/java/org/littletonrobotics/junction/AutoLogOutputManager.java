@@ -210,7 +210,6 @@ public class AutoLogOutputManager {
       this.declaringClass = declaringClass;
     }
   }
-  ;
 
   /** Returns the set of all fields in the class and its superclasses (public and private). */
   private static List<FieldAndDeclaringClass> getAllFields(Class<?> type) {

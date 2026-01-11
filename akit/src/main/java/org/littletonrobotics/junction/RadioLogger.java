@@ -74,12 +74,13 @@ class RadioLogger {
                   }
                 }
               } catch (Exception e) {
+                // Connection failed, will retry on next periodic call
               }
 
               // Update status
               String responseStr = response.toString().replaceAll("\\s+", "");
               synchronized (lock) {
-                isConnected = responseStr.length() > 0;
+                isConnected = !responseStr.isEmpty();
                 statusJson = responseStr;
               }
             });

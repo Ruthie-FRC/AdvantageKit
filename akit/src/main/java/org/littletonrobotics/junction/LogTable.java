@@ -253,7 +253,7 @@ public class LogTable {
     if (value == null) return;
     put(key + "/length", value.length);
     for (int i = 0; i < value.length; i++) {
-      put(key + "/" + Integer.toString(i), value[i]);
+      put(key + "/" + i, value[i]);
     }
   }
 
@@ -292,7 +292,7 @@ public class LogTable {
     if (value == null) return;
     put(key + "/length", value.length);
     for (int i = 0; i < value.length; i++) {
-      put(key + "/" + Integer.toString(i), value[i]);
+      put(key + "/" + i, value[i]);
     }
   }
 
@@ -333,7 +333,7 @@ public class LogTable {
     if (value == null) return;
     put(key + "/length", value.length);
     for (int i = 0; i < value.length; i++) {
-      put(key + "/" + Integer.toString(i), value[i]);
+      put(key + "/" + i, value[i]);
     }
   }
 
@@ -372,7 +372,7 @@ public class LogTable {
     if (value == null) return;
     put(key + "/length", value.length);
     for (int i = 0; i < value.length; i++) {
-      put(key + "/" + Integer.toString(i), value[i]);
+      put(key + "/" + i, value[i]);
     }
   }
 
@@ -423,7 +423,7 @@ public class LogTable {
     if (value == null) return;
     put(key + "/length", value.length);
     for (int i = 0; i < value.length; i++) {
-      put(key + "/" + Integer.toString(i), value[i]);
+      put(key + "/" + i, value[i]);
     }
   }
 
@@ -474,7 +474,7 @@ public class LogTable {
     if (value == null) return;
     put(key + "/length", value.length);
     for (int i = 0; i < value.length; i++) {
-      put(key + "/" + Integer.toString(i), value[i]);
+      put(key + "/" + i, value[i]);
     }
   }
 
@@ -514,7 +514,7 @@ public class LogTable {
     if (value == null) return;
     put(key + "/length", value.length);
     for (int i = 0; i < value.length; i++) {
-      put(key + "/" + Integer.toString(i), value[i]);
+      put(key + "/" + i, value[i]);
     }
   }
 
@@ -559,7 +559,7 @@ public class LogTable {
     if (value == null) return;
     put(key + "/length", value.length);
     for (int i = 0; i < value.length; i++) {
-      put(key + "/" + Integer.toString(i), value[i]);
+      put(key + "/" + i, value[i]);
     }
   }
 
@@ -690,7 +690,7 @@ public class LogTable {
     if (value == null) return;
     put(key + "/length", value.length);
     for (int i = 0; i < value.length; i++) {
-      put(key + "/" + Integer.toString(i), struct, value[i]);
+      put(key + "/" + i, struct, value[i]);
     }
   }
 
@@ -838,7 +838,7 @@ public class LogTable {
     if (value == null) return;
     put(key + "/length", value.length);
     for (int i = 0; i < value.length; i++) {
-      put(key + "/" + Integer.toString(i), value[i]);
+      put(key + "/" + i, value[i]);
     }
   }
 
@@ -905,7 +905,7 @@ public class LogTable {
     if (value == null) return;
     put(key + "/length", value.length);
     for (int i = 0; i < value.length; i++) {
-      put(key + "/" + Integer.toString(i), value[i]);
+      put(key + "/" + i, value[i]);
     }
   }
 
@@ -945,7 +945,7 @@ public class LogTable {
     if (data.containsKey(prefix + key + "/length")) {
       byte[][] value = new byte[get(key + "/length", 0)][];
       for (int i = 0; i < value.length; i++) {
-        value[i] = get(key + "/" + Integer.toString(i), new byte[0]);
+        value[i] = get(key + "/" + i, new byte[0]);
       }
       return value;
     } else {
@@ -994,7 +994,7 @@ public class LogTable {
     if (data.containsKey(prefix + key + "/length")) {
       boolean[][] value = new boolean[get(key + "/length", 0)][];
       for (int i = 0; i < value.length; i++) {
-        value[i] = get(key + "/" + Integer.toString(i), new boolean[0]);
+        value[i] = get(key + "/" + i, new boolean[0]);
       }
       return value;
     } else {
@@ -1052,7 +1052,7 @@ public class LogTable {
     if (data.containsKey(prefix + key + "/length")) {
       int[][] value = new int[get(key + "/length", 0)][];
       for (int i = 0; i < value.length; i++) {
-        value[i] = get(key + "/" + Integer.toString(i), new int[0]);
+        value[i] = get(key + "/" + i, new int[0]);
       }
       return value;
     } else {
@@ -1101,7 +1101,7 @@ public class LogTable {
     if (data.containsKey(prefix + key + "/length")) {
       long[][] value = new long[get(key + "/length", 0)][];
       for (int i = 0; i < value.length; i++) {
-        value[i] = get(key + "/" + Integer.toString(i), new long[0]);
+        value[i] = get(key + "/" + i, new long[0]);
       }
       return value;
     } else {
@@ -1150,7 +1150,7 @@ public class LogTable {
     if (data.containsKey(prefix + key + "/length")) {
       float[][] value = new float[get(key + "/length", 0)][];
       for (int i = 0; i < value.length; i++) {
-        value[i] = get(key + "/" + Integer.toString(i), new float[0]);
+        value[i] = get(key + "/" + i, new float[0]);
       }
       return value;
     } else {
@@ -1199,7 +1199,7 @@ public class LogTable {
     if (data.containsKey(prefix + key + "/length")) {
       double[][] value = new double[get(key + "/length", 0)][];
       for (int i = 0; i < value.length; i++) {
-        value[i] = get(key + "/" + Integer.toString(i), new double[0]);
+        value[i] = get(key + "/" + i, new double[0]);
       }
       return value;
     } else {
@@ -1248,7 +1248,7 @@ public class LogTable {
     if (data.containsKey(prefix + key + "/length")) {
       String[][] value = new String[get(key + "/length", 0)][];
       for (int i = 0; i < value.length; i++) {
-        value[i] = get(key + "/" + Integer.toString(i), new String[0]);
+        value[i] = get(key + "/" + i, new String[0]);
       }
       return value;
     } else {
@@ -1316,7 +1316,7 @@ public class LogTable {
         E[] defaultItemValue =
             (E[])
                 Array.newInstance(defaultValue.getClass().getComponentType().getComponentType(), 0);
-        value[i] = get(key + "/" + Integer.toString(i), defaultItemValue);
+        value[i] = get(key + "/" + i, defaultItemValue);
       }
       return value;
     } else {
@@ -1457,7 +1457,7 @@ public class LogTable {
         T[] defaultItemValue =
             (T[])
                 Array.newInstance(defaultValue.getClass().getComponentType().getComponentType(), 0);
-        value[i] = get(key + "/" + Integer.toString(i), struct, defaultItemValue);
+        value[i] = get(key + "/" + i, struct, defaultItemValue);
       }
       return value;
     } else {
@@ -1562,7 +1562,7 @@ public class LogTable {
         T[] defaultItemValue =
             (T[])
                 Array.newInstance(defaultValue.getClass().getComponentType().getComponentType(), 0);
-        value[i] = get(key + "/" + Integer.toString(i), defaultItemValue);
+        value[i] = get(key + "/" + i, defaultItemValue);
       }
       return value;
     } else {
@@ -1632,7 +1632,7 @@ public class LogTable {
         R[] defaultItemValue =
             (R[])
                 Array.newInstance(defaultValue.getClass().getComponentType().getComponentType(), 0);
-        value[i] = get(key + "/" + Integer.toString(i), defaultItemValue);
+        value[i] = get(key + "/" + i, defaultItemValue);
       }
       return value;
     } else {
