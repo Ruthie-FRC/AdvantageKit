@@ -49,10 +49,7 @@ public class RLOGServer implements LogDataReceiver, AutoCloseable {
   }
 
   public void end() {
-    if (thread != null) {
-      thread.close();
-      thread = null;
-    }
+    close();
   }
 
   @Override
