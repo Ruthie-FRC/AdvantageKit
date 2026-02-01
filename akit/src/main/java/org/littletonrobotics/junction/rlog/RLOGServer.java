@@ -25,9 +25,8 @@ public class RLOGServer implements LogDataReceiver, AutoCloseable {
   private ServerThread thread;
   private RLOGEncoder encoder = new RLOGEncoder();
 
-  private static final Object encoderLock = new Object();
-  private static final Object socketsLock = new Object();
-  private final Object threadLock = new Object();
+  private static Object encoderLock = new Object();
+  private static Object socketsLock = new Object();
 
   /** Creates a new RLOGServer on the default port (5800). */
   public RLOGServer() {
@@ -44,41 +43,35 @@ public class RLOGServer implements LogDataReceiver, AutoCloseable {
   }
 
   public void start() {
-    synchronized (threadLock) {
-      thread = new ServerThread(port);
-      thread.start();
-    }
+    thread = new ServerThread(port);
+    thread.start();
     System.out.println("[AdvantageKit] RLOG server started on port " + Integer.toString(port));
   }
 
   public void end() {
-    close();
+    if (thread != null) {
+      thread.close();
+      thread = null;
+    }
   }
 
   @Override
   public void close() {
-    synchronized (threadLock) {
-      if (thread != null) {
-        thread.close();
-        thread = null;
-      }
+    if (thread != null) {
+      thread.close();
+      thread = null;
     }
   }
 
   public void putTable(LogTable table) throws InterruptedException {
-    ServerThread localThread;
-    synchronized (threadLock) {
-      localThread = thread;
-    }
-
-    if (localThread != null && localThread.broadcastQueue.remainingCapacity() > 0) {
+    if (thread != null && thread.broadcastQueue.remainingCapacity() > 0) {
       // If broadcast is behind, drop this cycle and encode changes in the next cycle
       byte[] data;
       synchronized (encoderLock) {
         encoder.encodeTable(table, false);
         data = encodeData(encoder.getOutput().array());
       }
-      localThread.broadcastQueue.put(data);
+      thread.broadcastQueue.put(data);
     }
   }
 
