@@ -70,7 +70,7 @@ public class RLOGServer implements LogDataReceiver, AutoCloseable {
     synchronized (threadLock) {
       localThread = thread;
     }
-    
+
     if (localThread != null && localThread.broadcastQueue.remainingCapacity() > 0) {
       // If broadcast is behind, drop this cycle and encode changes in the next cycle
       byte[] data;
