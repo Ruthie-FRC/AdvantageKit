@@ -52,12 +52,7 @@ public class RLOGServer implements LogDataReceiver, AutoCloseable {
   }
 
   public void end() {
-    synchronized (threadLock) {
-      if (thread != null) {
-        thread.close();
-        thread = null;
-      }
-    }
+    close();
   }
 
   @Override
